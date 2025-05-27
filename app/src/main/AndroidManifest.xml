@@ -17,16 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Finalpass"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/Theme.Finalpass" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="REMOVED_GOOGLE_KEY" />
 
         <activity
-            android:name=".SplashActivity"
+            android:name=".MainActivity"
             android:theme="@style/Theme.Finalpass.Splash"
             android:exported="true">
             <intent-filter>

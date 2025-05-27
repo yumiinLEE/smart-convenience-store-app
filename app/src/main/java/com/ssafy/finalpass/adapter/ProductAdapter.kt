@@ -29,11 +29,21 @@ class ProductAdapter(
         with(holder.binding) {
             tvProductName.text = item.name
             tvProductPrice.text = "${item.price}원"
-            tvRating.text = getAverageRating(item.id)
+
+            val filteredComments = comments.filter { it.productId.toInt() == item.id }
+            val avgRating = if (filteredComments.isNotEmpty()) {
+                filteredComments.map { it.rating }.average()
+            } else {
+                0.0
+            }
+
+            tvRating.text = "%.1f".format(avgRating)
+            tvCommentCount.text = "(후기${filteredComments.size})"
 
             val context = imgProduct.context
             val resId = context.resources.getIdentifier(item.img, "drawable", context.packageName)
             imgProduct.setImageResource(if (resId != 0) resId else R.drawable.ic_launcher_foreground)
+
 
             btnAddToCart.setOnClickListener { onAddToCart(item) }
             btnDetail.setOnClickListener { onDetailClick(item) }
@@ -42,15 +52,9 @@ class ProductAdapter(
 
     override fun getItemCount() = items.size
 
-    fun updateList(newList: List<Product>) {
-        items = newList
+    fun updateList(newProducts: List<Product>, newComments: List<ProductComment>) {
+        items = newProducts
+        comments = newComments
         notifyDataSetChanged()
-    }
-
-    private fun getAverageRating(productId: Int): String {
-        val productComments = comments.filter { it.productId == productId }
-        if (productComments.isEmpty()) return "0.0"
-        val avg = productComments.map { it.rating }.average()
-        return "%.1f".format(avg)
     }
 }

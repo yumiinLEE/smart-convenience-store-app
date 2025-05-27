@@ -1,7 +1,7 @@
 package com.ssafy.finalpass.model.gpt
 
 data class GptRequest(
-    val model: String = "gpt-3.5-turbo",
+    val model: String = "gpt-4o",
     val messages: List<Message>,
     val temperature: Double = 0.7
 )

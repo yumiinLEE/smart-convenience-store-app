@@ -15,7 +15,8 @@ import com.ssafy.finalpass.adapter.ProductCommentAdapter
 import com.ssafy.finalpass.databinding.DialogWriteReviewBinding
 import com.ssafy.finalpass.databinding.FragmentMyReviewsBinding
 
-class MyReviewsFragment  : Fragment() {
+class MyReviewsFragment  : BaseFragment() {
+    override fun showBottomUI(): Boolean = false
 
     private var _binding: FragmentMyReviewsBinding? = null
     private val binding get() = _binding!!
@@ -46,8 +47,8 @@ class MyReviewsFragment  : Fragment() {
 
                     if (updatedComment.isNotBlank()) {
                         val updated = comment.copy(rating = updatedRating, comment = updatedComment)
-                        viewModel.updateComment(updated)
-                        viewModel.getUserComments(comment.userId)
+                        viewModel.updateComment(updated, comment.userId)
+//                        viewModel.getUserComments(comment.userId)
                         dialog.dismiss()
                     } else {
                         Toast.makeText(requireContext(), "내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
@@ -61,8 +62,7 @@ class MyReviewsFragment  : Fragment() {
                     .setTitle("리뷰 삭제")
                     .setMessage("정말 삭제하시겠습니까?")
                     .setPositiveButton("삭제") { _, _ ->
-                        viewModel.deleteComment(comment.id!!, comment.productId)
-                        viewModel.getUserComments(comment.userId)
+                        viewModel.deleteComment(comment.id!!, comment.userId)
                     }
                     .setNegativeButton("취소", null)
                     .show()

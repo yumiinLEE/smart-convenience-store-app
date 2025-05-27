@@ -30,4 +30,8 @@ interface CommentService {
     // 리뷰 수정
     @PUT("api/comments")
     suspend fun updateComment(@Body comment: ProductComment): Response<Void>
+
+    // 리뷰 전체
+    @GET("api/comments")
+    suspend fun getAllComments(): Response<List<ProductComment>>
 }

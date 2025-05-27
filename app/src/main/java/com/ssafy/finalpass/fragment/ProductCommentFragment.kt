@@ -13,7 +13,8 @@ import com.ssafy.finalpass.adapter.ProductCommentAdapter
 import com.ssafy.finalpass.databinding.FragmentProductCommentBinding
 
 
-class ProductCommentFragment : Fragment() {
+class ProductCommentFragment : BaseFragment() {
+    override fun showBottomUI(): Boolean = false
 
     private var _binding: FragmentProductCommentBinding? = null
     private val binding get() = _binding!!
@@ -47,33 +48,43 @@ class ProductCommentFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         adapter = ProductCommentAdapter()
-
         binding.recyclerReview.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerReview.adapter = adapter
 
-        viewModel.getProduct(productId.toInt())
-        viewModel.getProductComments(productId.toInt())
+        val productId = arguments?.getString("productId")?.toIntOrNull()
+        productId?.let { id ->
+            // 1. 상품 정보 및 댓글 요청
+            viewModel.getProduct(id)
+            viewModel.getProductComments(id)
 
-        viewModel.selectedProduct.observe(viewLifecycleOwner) { product ->
-            if (product != null) {
-                binding.tvProductName.text = product.name
-                binding.tvProductPrice.text = "${product.price}원"
-                val resId = resources.getIdentifier(
-                    product.img,
-                    "drawable",
-                    requireContext().packageName
-                )
-                binding.ivProductImage.setImageResource(if (resId != 0) resId else R.drawable.ic_launcher_foreground)
+            // 2. 상품 정보 표시
+            viewModel.selectedProduct.observe(viewLifecycleOwner) { product ->
+                if (product != null) {
+                    binding.tvProductName.text = product.name
+                    binding.tvProductPrice.text = "${product.price}원"
+                    val resId = resources.getIdentifier(
+                        product.img, "drawable", requireContext().packageName
+                    )
+                    binding.ivProductImage.setImageResource(
+                        if (resId != 0) resId else R.drawable.ic_launcher_foreground
+                    )
+                }
             }
-        }
 
-        viewModel.productComments.observe(viewLifecycleOwner) { commentList ->
-            adapter.submitList(commentList)
+            // 3. 리뷰 목록 표시
+            viewModel.productComments.observe(viewLifecycleOwner) { commentList ->
+                val filteredComments = commentList.filter { it.productId == id }
 
-            if (commentList.isNotEmpty()) {
-                val avgRating = commentList.map { it.rating }.average().toFloat()
-                binding.ratingBarAverage.rating = avgRating
-                binding.tvRating.text = "평점 ${String.format("%.1f", avgRating)}점"
+                adapter.submitList(filteredComments)
+
+                if (filteredComments.isNotEmpty()) {
+                    val avgRating = filteredComments.map { it.rating }.average().toFloat()
+                    binding.ratingBarAverage.rating = avgRating
+                    binding.tvRating.text = "평점 ${String.format("%.1f", avgRating)}점"
+                } else {
+                    binding.ratingBarAverage.rating = 0f
+                    binding.tvRating.text = "리뷰 없음"
+                }
             }
         }
     }

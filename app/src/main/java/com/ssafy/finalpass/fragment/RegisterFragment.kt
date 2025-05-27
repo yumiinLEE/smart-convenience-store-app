@@ -13,7 +13,8 @@ import com.ssafy.finalpass.databinding.FragmentRegisterBinding
 import com.ssafy.finalpass.dto.UserRequest
 
 private const val TAG = "RegisterFragment_싸피"
-class RegisterFragment : Fragment() {
+class RegisterFragment : BaseFragment() {
+    override fun showBottomUI(): Boolean = false
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!

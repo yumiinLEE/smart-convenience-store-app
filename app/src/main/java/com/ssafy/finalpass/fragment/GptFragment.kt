@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +16,8 @@ import com.ssafy.finalpass.model.gpt.Message
 import com.ssafy.finalpass.service.GPTClient
 import kotlinx.coroutines.launch
 
-class GptFragment : Fragment() {
+class GptFragment : BaseFragment() {
+    override fun showBottomUI(): Boolean = false
 
     private var _binding: FragmentGptBinding? = null
     private val binding get() = _binding!!
@@ -68,15 +68,24 @@ class GptFragment : Fragment() {
         val systemPrompt = """
         너는 편의점 상품을 추천해주는 스마트한 챗봇이야.
         
-        사용자가 입력한 요리나 음식명에 어울리는 상품을,
-        아래 [상품 목록] 중에서 2~3개만 골라 추천해줘.
+        사용자는 입력한 음식을 먹으려고 해.
+        너는 이 음식과 함께 먹으면 잘 어울리는 **상품 2~3개를 아래 [상품 목록]에서 골라** 추천해줘.
         
-        주의할 점은 다음과 같아:
-        - 반드시 아래 상품 목록에 있는 상품명만 사용해야 해.
-        - 추천하는 상품 이름은 꼭 작은따옴표('')로 감싸서 알려줘.
-        - 왜 그 상품이 어울리는지 간단한 이유도 함께 설명해줘.
-        - 전체 답변은 한두 문장으로 자연스럽게 구성해줘.
+        반드시 지켜야 할 조건은 다음과 같아:
         
+        1. 입력이 특정 **음식 이름**일 경우:
+        - 같은 종류의 음식은 추천하지 마 (예: '짜파게티'를 입력하면 다른 라면은 제외)
+        - 대신 함께 먹으면 맛이 조화로운 **다른 종류의 음식**만 추천해
+        - 예: '짜파게티' ➝ '불닭볶음면'을 섞어 먹으면 매콤한 풍미를 더할 수 있어
+        
+        2. 입력이 **식사 상황**일 경우 (예: 아침, 점심, 간식, 다이어트 등):
+        - 서로 다른 종류의 상품 2~3개를 조합해서 추천해 (예: 간편식 + 음료 + 간식)
+        
+        - 왜 이 조합이 좋은지 간단히 설명해
+        - 상품 이름은 반드시 작은따옴표('')로 감싸줘
+        - 전체 답변은 자연스럽고 짧은 한두 문장으로 작성해
+        
+      
         [상품 목록]
         $productNames
     """.trimIndent()

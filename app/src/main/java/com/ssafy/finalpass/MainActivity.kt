@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.ssafy.finalpass.databinding.ActivityMainBinding
 import com.ssafy.finalpass.fragment.GptFragment
 import com.ssafy.finalpass.fragment.HomeFragment
@@ -20,6 +21,17 @@ class MainActivity : AppCompatActivity() {
     var isAttendanceCheckedToday = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val startTime = System.currentTimeMillis()
+
+        // 시스템 SplashScreen 표시
+        val splashScreen = installSplashScreen()
+
+        // 일정 시간 동안 Splash 화면 유지
+        splashScreen.setKeepOnScreenCondition {
+            val elapsed = System.currentTimeMillis() - startTime
+            elapsed < 2000  // 2초 동안 유지
+        }
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -43,13 +55,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_search -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, SearchFragment())
-                        .commit()
-                    true
-                }
-
-                R.id.nav_qr -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, GptFragment())
                         .commit()
                     true
                 }

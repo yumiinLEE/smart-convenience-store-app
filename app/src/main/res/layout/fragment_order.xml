@@ -2,7 +2,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="12dp"
+    android:paddingRight="12dp"
+    android:paddingLeft="12dp"
+    android:paddingBottom="12dp"
     android:background="#FFFFFF">
 
     <!-- 배너 타이틀 -->
@@ -14,7 +16,8 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:padding="8dp" />
+        android:padding="10dp"
+        android:layout_marginTop="2dp"/>
 
     <!-- 기간 선택 드롭다운 -->
     <LinearLayout

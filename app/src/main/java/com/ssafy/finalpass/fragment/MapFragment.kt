@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RatingBar
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -19,7 +18,8 @@ import com.ssafy.finalpass.MainActivityViewModel
 import com.ssafy.finalpass.R
 import com.ssafy.finalpass.dto.Store
 
-class MapFragment : Fragment(), OnMapReadyCallback {
+class MapFragment : BaseFragment(), OnMapReadyCallback {
+    override fun showBottomUI(): Boolean = false
 
     private lateinit var googleMap: GoogleMap
     private val viewModel: MainActivityViewModel by activityViewModels()
@@ -73,8 +73,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         googleMap = map
 
         // 기본 위치: 서울 시청
-        val center = LatLng(37.5665, 126.9780)
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, 14f))
+        val center = LatLng(36.108663, 128.417887)
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, 16f))
 
         // 마커 클릭 리스너
         googleMap.setOnMarkerClickListener { marker ->

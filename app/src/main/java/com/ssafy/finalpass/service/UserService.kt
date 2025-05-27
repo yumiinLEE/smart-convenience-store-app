@@ -7,6 +7,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface UserService {
@@ -22,5 +23,12 @@ interface UserService {
     // id로 사용자 정보 조회
     @GET("api/users/{id}")
     suspend fun getUser(@Path("id") id: String): User
+
+    // 닉네임 수정
+    @PUT("api/users/{id}/name")
+    suspend fun updateUserName(
+        @Path("id") id: String,
+        @Body nameMap: Map<String, String>
+    ): User
 
 }

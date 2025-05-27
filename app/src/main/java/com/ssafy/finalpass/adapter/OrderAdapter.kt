@@ -16,8 +16,6 @@ import com.ssafy.finalpass.dto.OrderDetail
 
 class OrderAdapter(
     private val onReviewClick: (OrderDetail) -> Unit,
-    private val onReorderClick: (Order) -> Unit,
-    private val onDetailClick: (Order) -> Unit
 ) : ListAdapter<Order, OrderAdapter.OrderViewHolder>(diffUtil) {
 
     private var expandedPosition = -1
@@ -66,10 +64,6 @@ class OrderAdapter(
                 }
 
                 layoutOrderDetail.addView(detailView)
-            }
-
-            btnReorder.setOnClickListener {
-                onReorderClick(item)
             }
 
             btnDetail.setOnClickListener {

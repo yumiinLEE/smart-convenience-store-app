@@ -146,16 +146,19 @@ class HomeFragment : BaseFragment() {
 
         // 출석체크
         binding.btnCheckAttendanceMini.setOnClickListener {
+            if (userId.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), "로그인이 필요합니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             viewModel.checkAttendance(userId)
             Toast.makeText(requireContext(), "출석 완료! 10포인트 적립!", Toast.LENGTH_SHORT).show()
             binding.btnCheckAttendanceMini.isEnabled = false
 
-            // 출석 여부 저장
             (activity as? MainActivity)?.isAttendanceCheckedToday = true
-
-            // 출석 UI 즉시 반영
             updateAttendanceStatusView(true)
         }
+
 
     }
 

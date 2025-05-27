@@ -14,7 +14,8 @@ import com.ssafy.finalpass.R
 import com.ssafy.finalpass.databinding.FragmentLoginBinding
 
 private const val TAG = "LoginFragment_싸피"
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment() {
+    override fun showBottomUI(): Boolean = false
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!

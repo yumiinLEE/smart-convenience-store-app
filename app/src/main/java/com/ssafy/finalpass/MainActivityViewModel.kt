@@ -13,7 +13,6 @@ import com.ssafy.finalpass.dto.ProductComment
 import com.ssafy.finalpass.dto.Store
 import com.ssafy.finalpass.dto.User
 import com.ssafy.finalpass.dto.UserRequest
-import com.ssafy.finalpass.service.ProductService
 import com.ssafy.finalpass.service.RetrofitUtil
 import com.ssafy.finalpass.service.RetrofitUtil.Companion.attendanceService
 import com.ssafy.finalpass.service.RetrofitUtil.Companion.commentService
@@ -21,16 +20,14 @@ import com.ssafy.finalpass.service.RetrofitUtil.Companion.orderService
 import com.ssafy.finalpass.service.RetrofitUtil.Companion.productService
 import com.ssafy.finalpass.service.RetrofitUtil.Companion.storeService
 import com.ssafy.finalpass.service.RetrofitUtil.Companion.userService
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 
 class MainActivityViewModel : ViewModel() {
 
     //////////////////////////////////// user ////////////////////////////////////
-    private val _user = MutableLiveData<User>()
-    val user: LiveData<User> = _user
+    private val _user = MutableLiveData<User?>()
+    val user: LiveData<User?> = _user
 
     private val _registerResult = MutableLiveData<Result<String>>()
     val registerResult: LiveData<Result<String>> = _registerResult
@@ -95,6 +92,22 @@ class MainActivityViewModel : ViewModel() {
             }
         }
     }
+
+    // 닉네임 정보 수정
+    fun updateUserName(userId: String, newName: String) {
+        viewModelScope.launch {
+            try {
+                val updatedUser = RetrofitUtil.userService.updateUserName(
+                    userId,
+                    mapOf("name" to newName)
+                )
+                _user.value = updatedUser  // LiveData 갱신 → UI 자동 반영
+            } catch (e: Exception) {
+                Log.e("ViewModel", "닉네임 수정 실패", e)
+            }
+        }
+    }
+
 
     fun clearUser() {
         _user.value = null
@@ -172,6 +185,22 @@ class MainActivityViewModel : ViewModel() {
             }
         }
     }
+
+    fun getAllProductComments() {
+        viewModelScope.launch {
+            try {
+                val response = commentService.getAllComments()
+                if (response.isSuccessful) {
+                    _productComments.value = response.body() ?: emptyList()
+                } else {
+                    _productComments.value = emptyList()
+                }
+            } catch (e: Exception) {
+                _productComments.value = emptyList()
+            }
+        }
+    }
+
 
 
 
@@ -331,12 +360,12 @@ class MainActivityViewModel : ViewModel() {
         }
     }
 
-    fun deleteComment(commentId: Int, productId: Int) {
+    fun deleteComment(commentId: Int, userId: String) {
         viewModelScope.launch {
             try {
                 val response = commentService.deleteComment(commentId)
                 if (response.isSuccessful) {
-                    getProductComments(productId)
+                    getUserComments(userId)
                 }
             } catch (e: Exception) {
                 Log.e("ViewModel", "리뷰 삭제 실패", e)
@@ -344,12 +373,12 @@ class MainActivityViewModel : ViewModel() {
         }
     }
 
-    fun updateComment(updatedComment: ProductComment) {
+    fun updateComment(updatedComment: ProductComment, userId: String) {
         viewModelScope.launch {
             try {
                 val response = commentService.updateComment(updatedComment)
                 if (response.isSuccessful) {
-                    getProductComments(updatedComment.productId)
+                    getUserComments(userId)
                 }
             } catch (e: Exception) {
                 Log.e("ViewModel", "리뷰 수정 실패", e)

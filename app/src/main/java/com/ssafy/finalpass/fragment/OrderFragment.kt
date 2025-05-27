@@ -1,6 +1,7 @@
 package com.ssafy.finalpass.fragment
 
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +21,7 @@ import com.ssafy.finalpass.databinding.DialogWriteReviewBinding
 import com.ssafy.finalpass.databinding.FragmentOrderBinding
 import com.ssafy.finalpass.dto.ProductComment
 
+private const val TAG = "OrderFragment_싸피"
 class OrderFragment : BaseFragment() {
 
     private var _binding: FragmentOrderBinding? = null
@@ -27,6 +30,7 @@ class OrderFragment : BaseFragment() {
     private val viewModel: MainActivityViewModel by activityViewModels()
 
     private lateinit var orderAdapter: OrderAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,12 +45,7 @@ class OrderFragment : BaseFragment() {
             onReviewClick = { detail ->
                 showReviewDialog(detail.productId.toString(), detail.productName)
             },
-            onReorderClick = { order ->
-//                reorderItems(order)
-            },
-            onDetailClick = { order ->
-                // 상세내역은 adapter에서 토글하도록 설정됨
-            }
+
         )
 
         binding.recyclerOrder.apply {
@@ -54,11 +53,16 @@ class OrderFragment : BaseFragment() {
             adapter = orderAdapter
         }
 
-        viewModel.user.observe(viewLifecycleOwner) { user ->
-            user?.let {
-                viewModel.getUserOrders(it.id)
-            }
+        val prefs = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val userId = prefs.getString("user_id", null)
+
+        if (!userId.isNullOrEmpty()) {
+            viewModel.getUser(userId)
+            viewModel.getUserOrders(userId)
+        } else {
+            showLoginDialog()
         }
+
 
         val btnPeriodSelect = binding.btnPeriodSelect
         val recyclerView = binding.recyclerOrder
@@ -170,5 +174,27 @@ class OrderFragment : BaseFragment() {
         }
 
         dialog.show()
+    }
+
+    private fun showLoginDialog() {
+        androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setTitle("로그인 필요")
+            .setMessage("이 기능을 이용하려면 로그인이 필요합니다.")
+            .setPositiveButton("로그인") { dialog, _ ->
+                dialog.dismiss()
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, LoginFragment())
+                    .addToBackStack(null)
+                    .commit()
+            }
+            .setNegativeButton("취소") { dialog, _ ->
+                dialog.dismiss()
+                // 홈 화면으로 이동
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, HomeFragment())
+                    .commit()
+            }
+            .setCancelable(false)
+            .show()
     }
 }

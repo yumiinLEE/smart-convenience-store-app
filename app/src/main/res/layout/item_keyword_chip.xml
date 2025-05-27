@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_margin="4dp"
     android:padding="8dp"
     android:background="@drawable/bg_chip"
-    android:textColor="#333"
-    android:textSize="14sp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginBottom="8dp"
-    android:drawableEnd="@drawable/ic_close"
-    android:drawablePadding="4dp"
-    android:clickable="true"
-    android:focusable="true" />
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/tvKeyword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="샌드위치"
+        android:textSize="13sp"
+        android:textColor="#000000" />
+
+    <ImageView
+        android:id="@+id/btnRemove"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:contentDescription="삭제"
+        app:tint="#888888" />
+</LinearLayout>

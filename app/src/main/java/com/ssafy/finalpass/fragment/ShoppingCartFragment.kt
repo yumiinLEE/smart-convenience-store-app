@@ -12,7 +12,8 @@ import com.ssafy.finalpass.MainActivityViewModel
 import com.ssafy.finalpass.adapter.CartAdapter
 import com.ssafy.finalpass.databinding.FragmentShoppingCartBinding
 
-class ShoppingCartFragment : Fragment() {
+class ShoppingCartFragment : BaseFragment() {
+    override fun showBottomUI(): Boolean = false
 
     private var _binding: FragmentShoppingCartBinding? = null
     private val binding get() = _binding!!

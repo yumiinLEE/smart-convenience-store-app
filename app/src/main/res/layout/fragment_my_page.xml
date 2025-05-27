@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F9F9F9"
-    android:padding="16dp">
+    android:paddingRight="16dp"
+    android:paddingLeft="16dp"
+    android:paddingBottom="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +20,8 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:gravity="center"
-            android:layout_marginBottom="25dp" />
+            android:padding="10dp"
+            android:layout_marginTop="2dp"/>
 
         <!-- 상단 유저 영역 -->
         <LinearLayout
@@ -26,13 +29,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp">
 
             <TextView
                 android:id="@+id/tvUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="이유민님"
+                android:text="로그인이 필요합니다"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="#000000" />
@@ -65,7 +69,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="GS ALL 포인트"
+                    android:text="WR 포인트"
                     android:textSize="14sp"
                     android:textColor="#555555" />
 
@@ -73,7 +77,7 @@
                     android:id="@+id/tvUserPoint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" 7P"
+                    android:text=" 0P"
                     android:textStyle="bold"
                     android:textSize="16sp"
                     android:layout_marginStart="8dp"

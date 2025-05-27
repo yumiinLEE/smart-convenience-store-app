@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.ssafy.finalpass.MainActivityViewModel
 import com.ssafy.finalpass.R
@@ -89,11 +88,36 @@ class MyPageFragment : BaseFragment() {
             // ViewModel 내 사용자 정보 초기화 (선택)
             viewModel.clearUser()
 
-            // LoginFragment로 이동
+            // HomeFragment 이동
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, HomeFragment())
                 .addToBackStack(null)
                 .commit()
+        }
+
+        binding.btnEditInfo.setOnClickListener {
+            val context = requireContext()
+            val user = viewModel.user.value
+            if (user != null) {
+                val input = android.widget.EditText(context).apply {
+                    setText(user.name)
+                }
+
+                AlertDialog.Builder(context)
+                    .setTitle("닉네임 수정")
+                    .setView(input)
+                    .setPositiveButton("확인") { dialog, _ ->
+                        val newName = input.text.toString().trim()
+                        if (newName.isNotEmpty()) {
+                            viewModel.updateUserName(user.id, newName)
+                        }
+                        dialog.dismiss()
+                    }
+                    .setNegativeButton("취소") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .show()
+            }
         }
 
     }
@@ -101,7 +125,7 @@ class MyPageFragment : BaseFragment() {
     private fun showLoginDialog() {
         AlertDialog.Builder(requireContext())
             .setTitle("로그인 필요")
-            .setMessage("이 기능을 사용하려면 로그인이 필요합니다.")
+            .setMessage("이 기능을 이용하려면 로그인이 필요합니다.")
             .setPositiveButton("로그인") { dialog, _ ->
                 dialog.dismiss()
                 // 로그인 화면으로 이동
@@ -110,12 +134,11 @@ class MyPageFragment : BaseFragment() {
                     .addToBackStack(null)
                     .commit()
             }
-            .setNegativeButton("회원가입") { dialog, _ ->
+            .setNegativeButton("취소") { dialog, _ ->
                 dialog.dismiss()
-                // 회원가입 화면으로 이동
+                // 홈 화면으로 이동
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, RegisterFragment())
-                    .addToBackStack(null)
+                    .replace(R.id.fragment_container, HomeFragment())
                     .commit()
             }
             .setCancelable(false)
