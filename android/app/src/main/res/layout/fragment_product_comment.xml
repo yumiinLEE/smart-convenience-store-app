@@ -2,8 +2,22 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:paddingRight="12dp"
+    android:paddingLeft="12dp"
+    android:paddingBottom="12dp"
     android:background="#FFFFFF">
+
+    <TextView
+        android:id="@+id/tvBannerTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="상품리뷰"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_marginTop="2dp"/>
+
 
     <!-- 상품 이미지 -->
     <ImageView
