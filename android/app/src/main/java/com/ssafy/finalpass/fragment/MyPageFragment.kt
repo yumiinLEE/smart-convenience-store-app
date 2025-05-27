@@ -145,7 +145,7 @@ class MyPageFragment : BaseFragment() {
                 dialog.dismiss()
                 // 홈 화면으로 이동
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, HomeFragment())
+                    .replace(R.id.fragment_container, MyPageFragment())
                     .commit()
             }
             .setCancelable(false)

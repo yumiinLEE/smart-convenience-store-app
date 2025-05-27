@@ -114,7 +114,6 @@ class SearchFragment : BaseFragment() {
         }
 
         // 초기 요청
-        viewModel.getAllProduct()
         viewModel.getAllProductComments()
         if (viewModel.user.value != null) {
             viewModel.fetchFavorites()

@@ -1,5 +1,6 @@
 package com.ssafy.finalpass.fragment
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
@@ -147,7 +148,7 @@ class HomeFragment : BaseFragment() {
         // 출석체크
         binding.btnCheckAttendanceMini.setOnClickListener {
             if (userId.isNullOrEmpty()) {
-                Toast.makeText(requireContext(), "로그인이 필요합니다.", Toast.LENGTH_SHORT).show()
+                showLoginDialog()
                 return@setOnClickListener
             }
 
@@ -181,5 +182,28 @@ class HomeFragment : BaseFragment() {
     fun updateAttendanceStatusView(isChecked: Boolean) {
         binding.btnCheckAttendanceMini.visibility = if (isChecked) View.GONE else View.VISIBLE
         binding.imgAttendanceStamp.visibility = if (isChecked) View.VISIBLE else View.GONE
+    }
+
+    private fun showLoginDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("로그인 필요")
+            .setMessage("이 기능을 이용하려면 로그인이 필요합니다.")
+            .setPositiveButton("로그인") { dialog, _ ->
+                dialog.dismiss()
+                // 로그인 화면으로 이동
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, LoginFragment())
+                    .addToBackStack(null)
+                    .commit()
+            }
+            .setNegativeButton("취소") { dialog, _ ->
+                dialog.dismiss()
+                // 홈 화면으로 이동
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, HomeFragment())
+                    .commit()
+            }
+            .setCancelable(false)
+            .show()
     }
 }
