@@ -1,8 +1,8 @@
 package com.ssafy.finalpass.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.finalpass.R
 import com.ssafy.finalpass.databinding.ItemProductBinding
@@ -13,8 +13,11 @@ class ProductAdapter(
     private var items: List<Product>,
     private var comments: List<ProductComment>,
     private val onAddToCart: (Product) -> Unit,
-    private val onDetailClick: (Product) -> Unit
+    private val onDetailClick: (Product) -> Unit,
+    private val onFavoriteToggle: (Product, Boolean) -> Unit
 ) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+
+    private var favoriteProductIds = mutableSetOf<Int>()
 
     inner class ProductViewHolder(val binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -26,6 +29,8 @@ class ProductAdapter(
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val item = items[position]
+        Log.d("Adapter", "onBindViewHolder called for: ${item.name}")
+
         with(holder.binding) {
             tvProductName.text = item.name
             tvProductPrice.text = "${item.price}원"
@@ -47,6 +52,22 @@ class ProductAdapter(
 
             btnAddToCart.setOnClickListener { onAddToCart(item) }
             btnDetail.setOnClickListener { onDetailClick(item) }
+
+            val isFavorite = favoriteProductIds.contains(item.id)
+            btnFavorite.text = if (isFavorite) "❤️" else "🤍"
+
+            btnFavorite.setOnClickListener {
+                val newState = !favoriteProductIds.contains(item.id)
+                if (newState) {
+                    favoriteProductIds.add(item.id)
+                } else {
+                    favoriteProductIds.remove(item.id)
+                }
+
+                btnFavorite.text = if (newState) "❤️" else "🤍"
+                onFavoriteToggle(item, newState)
+            }
+
         }
     }
 
@@ -55,6 +76,11 @@ class ProductAdapter(
     fun updateList(newProducts: List<Product>, newComments: List<ProductComment>) {
         items = newProducts
         comments = newComments
+        notifyDataSetChanged()
+    }
+
+    fun updateFavorites(newFavoriteIds: Set<Int>) {
+        favoriteProductIds = newFavoriteIds.toMutableSet()
         notifyDataSetChanged()
     }
 }

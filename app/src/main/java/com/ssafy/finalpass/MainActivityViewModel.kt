@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ssafy.finalpass.dto.FavoriteRequest
 import com.ssafy.finalpass.dto.Order
 import com.ssafy.finalpass.dto.OrderDetail
 import com.ssafy.finalpass.dto.OrderRequest
@@ -13,6 +14,7 @@ import com.ssafy.finalpass.dto.ProductComment
 import com.ssafy.finalpass.dto.Store
 import com.ssafy.finalpass.dto.User
 import com.ssafy.finalpass.dto.UserRequest
+import com.ssafy.finalpass.service.FavoriteService
 import com.ssafy.finalpass.service.RetrofitUtil
 import com.ssafy.finalpass.service.RetrofitUtil.Companion.attendanceService
 import com.ssafy.finalpass.service.RetrofitUtil.Companion.commentService
@@ -186,17 +188,33 @@ class MainActivityViewModel : ViewModel() {
         }
     }
 
-    fun getAllProductComments() {
+    //////////////////////////////////// favorite product ////////////////////////////////////
+    private val _favoriteIds = MutableLiveData<Set<Int>>()
+    val favoriteIds: LiveData<Set<Int>> get() = _favoriteIds
+
+
+    fun addFavorite(productId: Int) {
         viewModelScope.launch {
-            try {
-                val response = commentService.getAllComments()
-                if (response.isSuccessful) {
-                    _productComments.value = response.body() ?: emptyList()
-                } else {
-                    _productComments.value = emptyList()
-                }
-            } catch (e: Exception) {
-                _productComments.value = emptyList()
+            val userId = user.value?.id ?: return@launch
+            val res = RetrofitUtil.favoriteService.addFavorite(FavoriteRequest(userId, productId))
+            if (!res.isSuccessful) Log.e("찜 추가 실패", res.code().toString())
+        }
+    }
+
+    fun removeFavorite(productId: Int) {
+        viewModelScope.launch {
+            val userId = user.value?.id ?: return@launch
+            val res = RetrofitUtil.favoriteService.removeFavorite(FavoriteRequest(userId, productId))
+            if (!res.isSuccessful) Log.e("찜 삭제 실패", res.code().toString())
+        }
+    }
+
+    fun fetchFavorites() {
+        viewModelScope.launch {
+            val userId = user.value?.id ?: return@launch
+            val res = RetrofitUtil.favoriteService.getFavorites(userId)
+            if (res.isSuccessful) {
+                _favoriteIds.value = res.body()?.toSet() ?: emptySet()
             }
         }
     }
@@ -382,6 +400,21 @@ class MainActivityViewModel : ViewModel() {
                 }
             } catch (e: Exception) {
                 Log.e("ViewModel", "리뷰 수정 실패", e)
+            }
+        }
+    }
+
+    fun getAllProductComments() {
+        viewModelScope.launch {
+            try {
+                val response = commentService.getAllComments()
+                if (response.isSuccessful) {
+                    _productComments.value = response.body() ?: emptyList()
+                } else {
+                    _productComments.value = emptyList()
+                }
+            } catch (e: Exception) {
+                _productComments.value = emptyList()
             }
         }
     }

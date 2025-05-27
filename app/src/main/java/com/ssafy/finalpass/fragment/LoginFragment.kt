@@ -59,7 +59,7 @@ class LoginFragment : BaseFragment() {
 
                 // MyPageFragment로 이동
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, MyPageFragment())
+                    .replace(R.id.fragment_container, HomeFragment())
                     .addToBackStack(null)
                     .commit()
 

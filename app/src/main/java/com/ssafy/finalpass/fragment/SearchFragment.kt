@@ -29,15 +29,21 @@ class SearchFragment : BaseFragment() {
 
     private var currentProducts: List<Product>? = null
     private var currentComments: List<ProductComment>? = null
+    private var currentFavorites: Set<Int>? = null
 
     private fun tryUpdateAdapter() {
         if (currentProducts != null && currentComments != null) {
             adapter.updateList(currentProducts!!, currentComments!!)
+            adapter.updateFavorites(currentFavorites ?: emptySet())
             binding.rvOrderList.visibility = if (currentProducts!!.isEmpty()) View.GONE else View.VISIBLE
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -46,24 +52,12 @@ class SearchFragment : BaseFragment() {
         binding.rvOrderList.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvOrderList.visibility = View.GONE
 
-        // 댓글과 상품 전체 요청
-        viewModel.getAllProductComments()
-        viewModel.getAllProduct()
-
-        // 카테고리 필터
-        val initialCategory = arguments?.getString("category")
-        if (!initialCategory.isNullOrBlank()) {
-            viewModel.searchByCategory(initialCategory)
-            binding.searchView.setQuery(initialCategory, false)
-        }
-
-        // 어댑터 초기화 (빈 상태로)
+        // 어댑터 초기화
         adapter = ProductAdapter(
             emptyList(),
             emptyList(),
             onAddToCart = { product ->
                 val user = viewModel.user.value
-
                 if (user == null) {
                     showLoginRequiredDialog()
                 } else {
@@ -77,8 +71,23 @@ class SearchFragment : BaseFragment() {
                     .replace(R.id.fragment_container, fragment)
                     .addToBackStack(null)
                     .commit()
+            },
+            onFavoriteToggle = { product, isFavorite ->
+                val user = viewModel.user.value
+                if (user == null) {
+                    showLoginRequiredDialog()
+                } else {
+                    if (isFavorite) {
+                        viewModel.addFavorite(product.id)
+                        Toast.makeText(requireContext(), "${product.name} 찜 추가", Toast.LENGTH_SHORT).show()
+                    } else {
+                        viewModel.removeFavorite(product.id)
+                        Toast.makeText(requireContext(), "${product.name} 찜 해제", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         )
+
         binding.rvOrderList.adapter = adapter
 
         // LiveData 관찰
@@ -91,6 +100,31 @@ class SearchFragment : BaseFragment() {
         viewModel.productComments.observe(viewLifecycleOwner) { comments ->
             currentComments = comments
             tryUpdateAdapter()
+        }
+
+        viewModel.favoriteIds.observe(viewLifecycleOwner) { favoriteSet ->
+            currentFavorites = favoriteSet
+            tryUpdateAdapter()
+        }
+
+        viewModel.user.observe(viewLifecycleOwner) { user ->
+            if (user != null) {
+                viewModel.fetchFavorites()
+            }
+        }
+
+        // 초기 요청
+        viewModel.getAllProduct()
+        viewModel.getAllProductComments()
+        if (viewModel.user.value != null) {
+            viewModel.fetchFavorites()
+        }
+
+        // 카테고리 필터 (홈에서 넘어온 경우)
+        val initialCategory = arguments?.getString("category")
+        if (!initialCategory.isNullOrBlank()) {
+            viewModel.searchByCategory(initialCategory)
+            binding.searchView.setQuery(initialCategory, false)
         }
 
         setupRecentSearchUI()
@@ -169,16 +203,10 @@ class SearchFragment : BaseFragment() {
         binding.recentContainer.visibility = if (recentKeywords.isEmpty()) View.GONE else View.VISIBLE
     }
 
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     private fun showLoginRequiredDialog() {
         androidx.appcompat.app.AlertDialog.Builder(requireContext())
             .setTitle("로그인 필요")
-            .setMessage("장바구니에 상품을 추가하려면 로그인이 필요합니다.")
+            .setMessage("상품을 추가하려면 로그인이 필요합니다.")
             .setPositiveButton("로그인") { dialog, _ ->
                 dialog.dismiss()
                 parentFragmentManager.beginTransaction()
@@ -188,14 +216,10 @@ class SearchFragment : BaseFragment() {
             }
             .setNegativeButton("취소") { dialog, _ ->
                 dialog.dismiss()
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, HomeFragment())
-                    .commit()
             }
             .setCancelable(false)
             .show()
     }
-
 
     companion object {
         private const val ARG_CATEGORY = "category"

@@ -90,30 +90,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="4"
+            android:weightSum="2"
             android:background="@android:color/white"
             android:elevation="2dp"
             android:padding="12dp">
 
             <!-- 쿠폰함 -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_person" />
-                <TextView
-                    android:text="쿠폰함"
-                    android:textSize="12sp"
-                    android:layout_marginTop="4dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
 
             <!-- 찜 -->
             <LinearLayout
@@ -127,7 +110,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_person" />
+                    android:src="@drawable/favorite" />
                 <TextView
                     android:text="찜"
                     android:textSize="12sp"
@@ -146,31 +129,11 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="24dp"
+                    android:layout_width="30dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_person" />
+                    android:src="@drawable/review" />
                 <TextView
                     android:text="나의후기"
-                    android:textSize="12sp"
-                    android:layout_marginTop="4dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-            <!-- 선물함 -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_person" />
-                <TextView
-                    android:text="선물함"
                     android:textSize="12sp"
                     android:layout_marginTop="4dp"
                     android:layout_width="wrap_content"
@@ -199,7 +162,7 @@
                     android:text="주문 정보"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:layout_marginBottom="8dp" />
+                    android:layout_marginBottom="15dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -213,7 +176,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="장바구니"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:layout_marginLeft="2dp"/>
 
                     <TextView
                         android:id="@+id/btnOrderList"
@@ -249,7 +213,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="#212121"
-                    android:layout_marginBottom="12dp" />
+                    android:layout_marginBottom="15dp" />
 
                 <!-- 정보 수정 -->
                 <TextView
@@ -258,7 +222,8 @@
                     android:layout_height="wrap_content"
                     android:text="정보 수정"
                     android:textSize="14sp"
-                    android:layout_marginBottom="12dp" />
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="2dp"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

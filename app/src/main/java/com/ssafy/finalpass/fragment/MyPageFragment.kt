@@ -120,6 +120,13 @@ class MyPageFragment : BaseFragment() {
             }
         }
 
+        binding.btnOrderHistory.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, MyFavoritesFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
     }
 
     private fun showLoginDialog() {

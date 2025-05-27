@@ -96,6 +96,18 @@ CREATE TABLE attendance (
     FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
 
+-- 12. 찜한 상품 테이블 (즐겨찾기)
+CREATE TABLE favorite_product (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(50) NOT NULL,
+    product_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_user_product (user_id, product_id),
+    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE
+);
+
+
 INSERT INTO user (id, name, pass, point, payment) VALUES
 ('id1', '이유민', 'pass1', 100, 0),
 ('id2', '반충기', 'pass2', 100, 0),
