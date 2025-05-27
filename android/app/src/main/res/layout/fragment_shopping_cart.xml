@@ -7,6 +7,17 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
+    <TextView
+        android:id="@+id/tvBannerTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="장바구니"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_marginTop="2dp"/>
+
     <!-- 🛍️ 장바구니 상품 리스트 -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCart"
