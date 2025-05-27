@@ -1,0 +1,16 @@
+<!-- res/menu/main_menu.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_notification"
+        android:icon="@drawable/ic_notification"
+        android:title="알림"
+        app:showAsAction="always" />
+
+
+    <item
+        android:id="@+id/shoppingList"
+        android:icon="@drawable/ic_shopping_cart"
+        android:title="장바구니"
+        app:showAsAction="always" />
+</menu>

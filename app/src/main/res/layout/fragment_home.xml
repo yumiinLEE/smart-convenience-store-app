@@ -1,0 +1,355 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"> <!-- 연회색 배경 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- 상단 배너 -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginBottom="10dp">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/homeBannerViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/bannerIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="12dp"
+                android:text="1/9 +"
+                android:textSize="14sp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/rounded_indicator_bg"
+                android:padding="6dp"
+                android:alpha="0.7" />
+        </FrameLayout>
+
+        <!-- 카테고리 전체를 하나의 박스에 묶기 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_rounded_white"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp">
+
+            <!-- 실제 카테고리 4x2 -->
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="4"
+                android:rowCount="2"
+                android:alignmentMode="alignMargins"
+                android:rowOrderPreserved="false"
+                android:useDefaultMargins="true">
+
+                <!-- 항목 하나당: LinearLayout → TextView(emoji) + TextView(라벨) -->
+                <LinearLayout
+                    android:id="@+id/categoryAll"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="8dp">
+                    <TextView
+                        android:text="🏪"
+                        android:textSize="28sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="전체"
+                        android:textSize="12sp"
+                        android:layout_marginTop="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/categoryNoodles"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="8dp">
+                    <TextView
+                        android:text="🍱"
+                        android:textSize="28sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="간편식"
+                        android:textSize="12sp"
+                        android:layout_marginTop="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/categoryRice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="8dp">
+                    <TextView
+                        android:text="🍜"
+                        android:textSize="28sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="라면"
+                        android:textSize="12sp"
+                        android:layout_marginTop="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/categoryDrinks"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="8dp">
+                    <TextView
+                        android:text="🥤"
+                        android:textSize="28sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="음료"
+                        android:textSize="12sp"
+                        android:layout_marginTop="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/categoryNightFood"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="8dp">
+                    <TextView
+                        android:text="🍪"
+                        android:textSize="28sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="과자"
+                        android:textSize="12sp"
+                        android:layout_marginTop="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/categorySnacks"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="8dp">
+                    <TextView
+                        android:text="🍨"
+                        android:textSize="28sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="아이스크림"
+                        android:textSize="12sp"
+                        android:layout_marginTop="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/categoryAlcoholSnacks"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="8dp">
+                    <TextView
+                        android:text="🍷"
+                        android:textSize="28sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="주류"
+                        android:textSize="12sp"
+                        android:layout_marginTop="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/categoryEtc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="8dp">
+                    <TextView
+                        android:text="🧼"
+                        android:textSize="28sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="기타"
+                        android:textSize="12sp"
+                        android:layout_marginTop="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </GridLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- 왼쪽 큰 카드 → AI 음식 추천 -->
+            <LinearLayout
+                android:id="@+id/btnGoToAiRecommend"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="@drawable/bg_rounded_white"
+                android:padding="13dp"
+                android:layout_marginEnd="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🤖 AI 음식 추천"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#222222"
+                    android:layout_marginBottom="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="음식을 입력하면\n찰떡 궁합 조합을 추천해드려요!"
+                    android:textSize="12sp"
+                    android:textColor="#666666"
+                    android:layout_marginBottom="5dp" />
+
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/ai_chat"
+                    android:layout_gravity="center" />
+
+            </LinearLayout>
+
+            <!-- 오른쪽 두 개 카드 -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="8dp">
+
+                <!-- 카드 2 -->
+                <LinearLayout
+                    android:id="@+id/findStore"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.6"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_rounded_white"
+                    android:padding="13dp"
+                    android:layout_marginBottom="8dp">
+
+                    <!-- 제목 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🏪 와라편의점"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#222222"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- 설명 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="가장 가까운 매장을 찾아보세요!"
+                        android:textSize="12sp"
+                        android:textColor="#666666">
+
+                    </TextView></LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_rounded_white"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🎁 출석체크"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#222222"
+                        android:layout_marginBottom="5dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="오늘도 출석하고\n포인트를 쌓아보세요!"
+                        android:textSize="13sp"
+                        android:textColor="#666666"
+                        android:layout_marginBottom="3dp" />
+
+                    <ImageView
+                        android:id="@+id/imgAttendanceStamp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_stamp"
+                        android:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/btnCheckAttendanceMini"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="출석하기"
+                        android:textSize="13sp"
+                        android:textColor="#FFFFFF"
+                        android:backgroundTint="#00997D"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

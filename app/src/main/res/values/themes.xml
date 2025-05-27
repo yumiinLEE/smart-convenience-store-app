@@ -1,0 +1,24 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- ✅ 앱 전체 기본 테마 (액션바 O, 연두색 설정) -->
+    <style name="Theme.Finalpass" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- 액션바 색상 -->
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryVariant">@color/light_green</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+    </style>
+
+    <!-- ✅ 액션바 색상 설정 -->
+    <style name="MyActionBar" parent="Widget.AppCompat.ActionBar">
+        <item name="background">@color/light_green</item>
+    </style>
+
+    <!-- ✅ SplashActivity 전용 테마 (액션바 제거) -->
+    <style name="Theme.Finalpass.Splash" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+</resources>

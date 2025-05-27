@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <TextView android:id="@+id/option_1month"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1개월"
+        android:padding="12dp" />
+
+    <TextView android:id="@+id/option_3months"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="3개월"
+        android:padding="12dp" />
+
+    <TextView android:id="@+id/option_6months"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="6개월"
+        android:padding="12dp" />
+
+    <TextView android:id="@+id/option_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="전체"
+        android:padding="12dp" />
+</LinearLayout>

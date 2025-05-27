@@ -1,0 +1,98 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="#FFFFFF">
+
+    <!-- 배너 타이틀 -->
+    <TextView
+        android:id="@+id/tvBannerTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="주문 내역"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="8dp" />
+
+    <!-- 기간 선택 드롭다운 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginBottom="8dp">
+
+        <Button
+            android:id="@+id/btnPeriodSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1개월"
+            android:padding="8dp"
+            android:textColor="#000000"
+            android:backgroundTint="#F5F5F5"
+            android:drawableEnd="@android:drawable/arrow_down_float"
+            android:drawablePadding="4dp" />
+    </LinearLayout>
+
+    <!-- 주문 없음 안내 -->
+    <LinearLayout
+        android:id="@+id/emptyLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        android:paddingTop="40dp">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/no_list" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="주문내역이 없어요"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+
+    <!-- 주문 목록 RecyclerView -->
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerOrder"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false" />
+
+    <LinearLayout
+        android:id="@+id/layoutOrderDetail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvOrderTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="주문 상세"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingBottom="8dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerOrderItems"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:nestedScrollingEnabled="true" />
+    </LinearLayout>
+
+</LinearLayout>

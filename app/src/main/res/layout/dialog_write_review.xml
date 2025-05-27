@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/ivProductImage"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_foreground"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:id="@+id/tvUserId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="작성자: user123"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/tvProductName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="상품명: 오감자"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="1"
+            android:rating="5"
+            android:layout_marginBottom="8dp"
+            android:progressTint="@color/yellow" />
+
+
+        <EditText
+            android:id="@+id/etReview"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:hint="리뷰를 입력하세요"
+            android:gravity="top"
+            android:background="@android:drawable/edit_text"
+            android:padding="8dp"
+            android:textSize="14sp"
+            android:layout_marginBottom="16dp"
+            android:inputType="textMultiLine"
+            android:maxLines="6" />
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="리뷰 등록"
+            android:backgroundTint="#4CAF50"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+</ScrollView>

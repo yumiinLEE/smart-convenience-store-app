@@ -1,0 +1,49 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:padding="16dp">
+
+    <!-- 배너 타이틀 -->
+    <TextView
+        android:id="@+id/tvBannerTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="찰떡 궁합 음식"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="8dp" />
+
+    <EditText
+        android:id="@+id/etFoodInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="음식을 입력해 주세요"/>
+
+    <Button
+        android:id="@+id/btnAsk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🤖 함께 먹을 음식 추천 받기 🤖"
+        android:backgroundTint="#4CAF50" />
+
+    <!-- GPT 응답 텍스트 -->
+    <TextView
+        android:id="@+id/tvGptReply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="추천 결과가 여기에 표시됩니다."
+        android:paddingTop="12dp"
+        android:textSize="14sp"
+        android:textColor="#333333" />
+
+    <!-- 추천 상품 리스트 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSuggestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="12dp" />
+</LinearLayout>

@@ -1,0 +1,84 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="#FFFFFF"
+    android:layout_marginBottom="8dp">
+
+    <!-- 사용자 정보와 별점 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- 프로필 이미지 (선택 사항) -->
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_person"
+        android:layout_marginEnd="6dp" />
+
+        <!-- 사용자 ID -->
+        <TextView
+            android:id="@+id/tvUserId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="abcd123 님"
+            android:textColor="#333333"
+            android:textSize="13sp"
+            android:layout_marginEnd="6dp" />
+
+        <!-- 별점 -->
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="1"
+            android:isIndicator="true"
+            android:rating="4.0"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:progressTint="@color/yellow" />
+    </LinearLayout>
+
+    <!-- 리뷰 본문 -->
+    <TextView
+        android:id="@+id/tvComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="튼튼하고 쓰임새가 좋은 제품이에요\n가격 할인에도 가성비가 좋아서 만족하며 사용 중이에요!"
+        android:textSize="14sp"
+        android:textColor="#333333"
+        android:layout_marginTop="6dp" />
+
+    <!-- 수정/삭제 텍스트뷰 영역 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:gravity="end">
+
+        <TextView
+            android:id="@+id/tvEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수정"
+            android:textSize="12sp"
+            android:textColor="#4CAF50"
+            android:layout_marginEnd="16dp" />
+
+        <TextView
+            android:id="@+id/tvDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="삭제"
+            android:textSize="12sp"
+            android:textColor="#F44336" />
+    </LinearLayout>
+
+</LinearLayout>

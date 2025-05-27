@@ -1,0 +1,273 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F9F9F9"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvBannerTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="마이페이지"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="25dp" />
+
+        <!-- 상단 유저 영역 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이유민님"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WELCOME"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#D81B60"
+                android:layout_marginStart="4dp" />
+        </LinearLayout>
+
+        <!-- 멤버십 카드 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            android:layout_marginBottom="12dp"
+            android:backgroundTint="#FFFFFF"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="GS ALL 포인트"
+                    android:textSize="14sp"
+                    android:textColor="#555555" />
+
+                <TextView
+                    android:id="@+id/tvUserPoint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 7P"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginStart="8dp"
+                    android:textColor="#000000" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- 아이콘 4개 영역 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            android:background="@android:color/white"
+            android:elevation="2dp"
+            android:padding="12dp">
+
+            <!-- 쿠폰함 -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_person" />
+                <TextView
+                    android:text="쿠폰함"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!-- 찜 -->
+            <LinearLayout
+                android:id="@+id/btnOrderHistory"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_person" />
+                <TextView
+                    android:text="찜"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!-- 나의 후기 -->
+            <LinearLayout
+                android:id="@+id/btnReviews"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_person" />
+                <TextView
+                    android:text="나의후기"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!-- 선물함 -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_person" />
+                <TextView
+                    android:text="선물함"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 주문 정보 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            android:backgroundTint="#FFFFFF"
+            app:cardElevation="2dp"
+            android:layout_marginTop="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="주문 정보"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="8dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/btnCart"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="장바구니"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/btnOrderList"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="주문 내역"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- 회원 정보 카드 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            android:backgroundTint="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- 섹션 타이틀 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="회원 정보"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#212121"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- 정보 수정 -->
+                <TextView
+                    android:id="@+id/btnEditInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="정보 수정"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="12dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- 로그아웃 버튼 -->
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="로그아웃"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="#B0BEC5" />
+
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorBackground">
+
+    <!-- 🛍️ 장바구니 상품 리스트 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerCart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="12dp"
+        android:clipToPadding="false" />
+
+    <!-- 💰 하단 고정 결제 영역 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@android:color/white"
+        android:elevation="4dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:weightSum="2">
+
+        <!-- 총 금액 -->
+        <TextView
+            android:id="@+id/tvTotalPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="총 결제금액: 0원"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#2E7D32" />
+
+        <!-- 결제 버튼 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnOrder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="결제하기"
+            android:textColor="@android:color/white"
+            app:cornerRadius="16dp"
+            app:backgroundTint="@color/colorPrimary" />
+    </LinearLayout>
+
+</LinearLayout>
