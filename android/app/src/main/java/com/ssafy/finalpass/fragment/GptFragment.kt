@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ssafy.finalpass.BuildConfig
 import com.ssafy.finalpass.MainActivityViewModel
 import com.ssafy.finalpass.adapter.GptProductAdapter
 import com.ssafy.finalpass.databinding.FragmentGptBinding
@@ -101,7 +103,7 @@ class GptFragment : BaseFragment() {
             try {
                 val response = GPTClient.gptService.getChatCompletion(
                     request,
-                    auth = "Bearer REMOVED_GPT_KEY"
+                    auth = "Bearer ${BuildConfig.OPENAI_API_KEY}"
                 )
                 if (response.isSuccessful) {
                     val reply = response.body()?.choices?.firstOrNull()?.message?.content

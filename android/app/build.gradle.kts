@@ -3,6 +3,14 @@ plugins {
     alias(libs.plugins.kotlin.android)
 }
 
+val MAPS_API_KEY: String = if (project.hasProperty("MAPS_API_KEY")) {
+    project.property("MAPS_API_KEY") as String
+} else {
+    ""
+}
+val OPENAI_API_KEY: String = project.findProperty("OPENAI_API_KEY") as? String ?: ""
+
+
 android {
     namespace = "com.ssafy.finalpass"
     compileSdk = 35
@@ -15,10 +23,13 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders["MAPS_API_KEY"] = MAPS_API_KEY
+        buildConfigField("String", "OPENAI_API_KEY", "\"$OPENAI_API_KEY\"")
     }
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
     buildTypes {
